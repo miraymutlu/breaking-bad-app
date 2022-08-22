@@ -4,6 +4,7 @@ import "./styles.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCharacters } from "../../redux/charactersSlice";
+import Loading from "../../components/Loading";
 
 function Home() {
   const characters = useSelector((state) => state.characters.items);
@@ -16,7 +17,7 @@ function Home() {
   }, [dispatch]);
 
   if (isLoading){
-    return <div>Loading...</div>
+    return <Loading />;
   }
 
   if(error){
