@@ -33,7 +33,7 @@ function Home() {
         {characters.map((character) => (
           <div key={character.id}>
             <img src={character.img} alt={character.name} className="character"/>
-            <div className="char_name">{character.name}</div>
+            <div className="character_name">{character.name}</div>
           </div>
         ))}
       </Masonry>

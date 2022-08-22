@@ -17,3 +17,7 @@
 .character {
   width: 100%;
 }
+.character_name{
+  padding: 10px 0;
+  font-size: 15px;
+}
