@@ -15,18 +15,18 @@ export const charactersSlice = createSlice({
   name: "characters",
   initialState: {
     items: [],
-    isLoading: false,
+    status: "idle",
     page: 0,
     hasNextPage: true,
   },
   reducers: {},
   extraReducers: {
     [fetchCharacters.pending]: (state) => {
-      state.isLoading=true;
+      state.status="loading";
     },
     [fetchCharacters.fulfilled]: (state, action) => {
       state.items=[...state.items, ...action.payload];
-      state.isLoading=false;
+      state.status="succeeded";
       state.page += 1;
 
       if(action.payload.length<12){
@@ -34,7 +34,7 @@ export const charactersSlice = createSlice({
       }
     },
     [fetchCharacters.rejected]: (state,action) => {
-      state.isLoading=false;
+      state.status="failed";
       state.error=action.error.message;
     },
   },

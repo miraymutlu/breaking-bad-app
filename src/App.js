@@ -8,8 +8,8 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/character/:character_id" element={<Detail />}></Route>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route path="/char/:char_id" element={<Detail />}></Route>
         </Routes>
       </div>
     </Router>
