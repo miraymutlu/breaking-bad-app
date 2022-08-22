@@ -24,6 +24,9 @@ function Detail() {
           <img src={char.img} alt={char.name} style={{ width: "50%" }} />
         </div>
       )}
+      {
+        char && <pre>{JSON.stringify(char, null, 2)}</pre>
+      }
     </div>
   );
 }
