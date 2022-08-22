@@ -9,6 +9,7 @@ import Error from "../../components/Error";
 
 function Home() {
   const characters = useSelector((state) => state.characters.items);
+  const nextPage = useSelector((state)=> state.characters.page);
   const isLoading = useSelector((state) => state.characters.isLoading);
   const error = useSelector((state) => state.characters.error);
   const dispatch = useDispatch();
@@ -17,13 +18,10 @@ function Home() {
     dispatch(fetchCharacters());
   }, [dispatch]);
 
-  if (isLoading){
-    return <Loading />;
-  }
-
   if(error){
     return <Error message={error}/>;
   }
+
   return (
     <div>
       <h1>Characters</h1>
@@ -39,6 +37,11 @@ function Home() {
           </div>
         ))}
       </Masonry>
+
+      <div style={{padding:"20px 0 40px 0",textAlign: 'center'}}>
+        {isLoading && <Loading />}
+        <button onClick={()=>dispatch(fetchCharacters(nextPage))}>Load More ({nextPage})</button>
+      </div>
     </div>
   );
 }
