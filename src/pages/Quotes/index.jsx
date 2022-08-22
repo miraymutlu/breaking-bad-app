@@ -18,19 +18,23 @@ function Quotes() {
   const error = useSelector(errorSelector);
 
   useEffect(() => {
-    dispatch(fetchAllQuotes());
-  }, [dispatch]);
+    if (status === "idle") {
+      dispatch(fetchAllQuotes());
+    }
+  }, [dispatch,status]);
 
   if (error) {
     return <Error message={error} />;
   }
 
-  return <div style={{ padding : '10px' }}>
-    <h1>Quotes</h1>
-    {status === "loading" && <Loading />}
-    {status === "succeeded" && data.map((item)=><Item key={item.quote_id} item={item}/>)}
-    </div>;
-
+  return (
+    <div style={{ padding: "10px" }}>
+      <h1>Quotes</h1>
+      {status === "loading" && <Loading />}
+      {status === "succeeded" &&
+        data.map((item) => <Item key={item.quote_id} item={item} />)}
+    </div>
+  );
 }
 
 export default Quotes;
