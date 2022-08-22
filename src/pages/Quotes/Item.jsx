@@ -4,7 +4,7 @@ import "./styles.css"
 function Item({ item }) {
   return (
     <div className="quote_item">
-      <q>{item.quote}</q>
+      <q>{item.quote}</q> <strong>{item.author}</strong>
     </div>
   );
 }
