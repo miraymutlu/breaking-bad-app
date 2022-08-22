@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCharacters } from "../../redux/charactersSlice";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function Home() {
   const characters = useSelector((state) => state.characters.items);
-  const nextPage = useSelector((state)=> state.characters.page);
+  const nextPage = useSelector((state) => state.characters.page);
+  const hasNextPage = useSelector((state) => state.characters.hasNextPage);
   const isLoading = useSelector((state) => state.characters.isLoading);
   const error = useSelector((state) => state.characters.error);
   const dispatch = useDispatch();
@@ -18,8 +20,8 @@ function Home() {
     dispatch(fetchCharacters());
   }, [dispatch]);
 
-  if(error){
-    return <Error message={error}/>;
+  if (error) {
+    return <Error message={error} />;
   }
 
   return (
@@ -32,15 +34,26 @@ function Home() {
       >
         {characters.map((character) => (
           <div key={character.id}>
-            <img src={character.img} alt={character.name} className="character"/>
-            <div className="character_name">{character.name}</div>
+            <Link to="/">
+              <img
+                src={character.img}
+                alt={character.name}
+                className="character"
+              />
+              <div className="character_name">{character.name}</div>
+            </Link>
           </div>
         ))}
       </Masonry>
 
-      <div style={{padding:"20px 0 40px 0",textAlign: 'center'}}>
+      <div style={{ padding: "20px 0 40px 0", textAlign: "center" }}>
         {isLoading && <Loading />}
-        <button onClick={()=>dispatch(fetchCharacters(nextPage))}>Load More ({nextPage})</button>
+        {hasNextPage && !isLoading && (
+          <button onClick={() => dispatch(fetchCharacters(nextPage))}>
+            Load More ({nextPage})
+          </button>
+        )}
+        {!hasNextPage && <div>There is nothing to be shown. </div>}
       </div>
     </div>
   );
