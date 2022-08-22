@@ -9,6 +9,7 @@ import {
 } from "../../redux/quotesSlice";
 import Error from "../../components/Error";
 import Loading from "../../components/Loading";
+import Item from "./Item";
 
 function Quotes() {
   const dispatch = useDispatch();
@@ -24,10 +25,10 @@ function Quotes() {
     return <Error message={error} />;
   }
 
-  return <div>
+  return <div style={{ padding : '10px' }}>
     <h1>Quotes</h1>
     {status === "loading" && <Loading />}
-    {status === "succeeded" && data.map((item)=><div>{item.quote}</div>)}
+    {status === "succeeded" && data.map((item)=><Item key={item.quote_id} item={item}/>)}
     </div>;
 
 }
