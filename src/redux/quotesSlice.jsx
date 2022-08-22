@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchQuotes = createAsyncThunk("quotes/getQuotes", async () => {
@@ -12,7 +12,11 @@ export const quotesSlice = createSlice({
   reducers: {
     items: [],
   },
-  extraReducers: {},
+  extraReducers: {
+    [fetchQuotes.fulfilled]: (state,action) => {
+      state.items = action.payload;
+    },
+  },
 });
 
 export default quotesSlice.reducer;
