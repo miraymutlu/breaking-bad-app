@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import Home from "./pages/Home/index.jsx";
-import Detail from "./pages/Detail/index.jsx";
-import Quotes from "./pages/Quotes/index.jsx";
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import Quotes from "./pages/Quotes";
 import "./App.css"
 
 function App() {
